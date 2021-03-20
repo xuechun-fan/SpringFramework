@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="user" class="com.fxc.entity.User" p:id="101" p:name="王先生"
+          p:age="38" p:addresses-ref="list"/>
+
+    <util:list id="list" list-class="java.util.ArrayList">
+        <bean id="addr1" class="com.fxc.entity.Address" p:addr="北京"/>
+        <bean id="addr2" class="com.fxc.entity.Address" p:addr="上海"/>
+    </util:list>
+
+
+
+</beans>

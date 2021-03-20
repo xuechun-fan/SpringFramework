@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user1" class="com.fxc.entity.User">
+        <property name="id" value="1"></property>
+        <property name="name" value="张三"></property>
+        <property name="age" value="18"></property>
+        <property name="addresses">
+            <list>
+                <ref bean="addr1"></ref>
+                <ref bean="addr2"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="user2" parent="user1">
+        <property name="addresses">
+            <list>
+                <ref bean="addr3"></ref>
+                <ref bean="addr4"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="stu" class="com.fxc.entity.Student" parent="user1">
+        <property name="score" value="98.0"></property>
+    </bean>
+
+    <bean id="addr1" class="com.fxc.entity.Address">
+        <property name="addr" value="大南村"></property>
+    </bean>
+    <bean id="addr2" class="com.fxc.entity.Address">
+        <property name="addr" value="大北村"></property>
+    </bean>
+    <bean id="addr3" class="com.fxc.entity.Address">
+        <property name="addr" value="周庄村"></property>
+    </bean>
+    <bean id="addr4" class="com.fxc.entity.Address">
+        <property name="addr" value="曹庄村"></property>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置实例工厂 bean -->
+    <bean id="carFactory" class="com.fxc.factory.InstanceCarFactory"></bean>
+
+    <!-- 配置实例工厂创建 Car -->
+    <bean id="car" factory-bean="carFactory" factory-method="getCar">
+        <constructor-arg value="2"></constructor-arg>
+    </bean>
+
+</beans>
