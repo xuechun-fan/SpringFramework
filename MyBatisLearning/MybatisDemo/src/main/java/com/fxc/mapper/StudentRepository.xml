@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxc.repository.StudentRepository">
+    <resultMap id="studentMap" type="com.fxc.entity.Student">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <association property="classes" javaType="com.fxc.entity.Classes">
+            <id column="cid" property="id"></id>
+            <result column="cname" property="name"></result>
+        </association>
+    </resultMap>
+    <select id="findById" parameterType="int" resultMap="studentMap">
+        select s.id as id, s.name as name, c.id as cid, c.name as cname from
+        student s, classes c where s.id=#{id} and s.cid=c.id;
+    </select>
+</mapper>

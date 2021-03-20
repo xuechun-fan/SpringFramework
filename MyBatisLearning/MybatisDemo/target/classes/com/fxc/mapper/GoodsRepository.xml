@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxc.repository.GoodsRepository">
+    <resultMap id="goodsMap" type="com.fxc.entity.Goods">
+        <id column="gid" property="id"/>
+        <result column="gname" property="name"/>
+        <collection property="customers" ofType="com.fxc.entity.Customer">
+            <id column="cid" property="id"/>
+            <result column="cname" property="name"/>
+        </collection>
+    </resultMap>
+    <select id="findById" resultMap="goodsMap">
+        select c.id cid, c.name cname, g.id gid, g.name gname from customer c, goods g, customer_goods cg where g.id=#{id} and cg.cid=c.id and cg.gid=g.id
+    </select>
+</mapper>

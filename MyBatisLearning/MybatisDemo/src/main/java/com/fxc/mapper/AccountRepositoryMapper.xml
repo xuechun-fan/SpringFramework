@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxc.repository.AccountRepository">
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <!-- 缓存创建之后，最后一次访问缓存的时间至缓存失效的时间 -->
+        <property name="timeToIdleSeconds" value="3600"/>
+        <!-- 缓存自创建时间起至失效的时间间隔 -->
+        <property name="timeToLiveSeconds" value="3600"/>
+        <!-- 缓存回收策略，LRU表示移除近期使用最少的对象 -->
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>
+    <insert id="save" parameterType="com.fxc.entity.Account">
+        insert into t_account (username, password, age) values (#{username}, #{password}, #{age})
+    </insert>
+    <!--<update id="update" parameterType="com.fxc.entity.Account">
+        update t_account set username=#{username}, password=#{password}, age=#{age} where id=#{id}
+    </update>-->
+    <!-- 改成动态的 update -->
+    <update id="update" parameterType="com.fxc.entity.Account">
+        update t_account
+        <set>
+            <if test="username!=null">
+                username=#{username}
+            </if>
+            <if test="password!=null">
+                password=#{password}
+            </if>
+            <if test="age!=0">
+                age=#{age}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from t_account where id=#{id}
+    </delete>
+    <select id="findAll" resultType="com.fxc.entity.Account">
+        select * from t_account
+    </select>
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.fxc.entity.Account">
+        select * from t_account where id=#{id}
+    </select>
+    <select id="findByName" parameterType="java.lang.String" resultType="com.fxc.entity.Account">
+        select * from t_account where username=#{username}
+    </select>
+    <select id="findByNameAndAge" resultType="com.fxc.entity.Account">
+        select * from t_account where username=#{param1} and age=#{param2}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(id) from t_account
+    </select>
+
+    <select id="findNameById" parameterType="int" resultType="java.lang.String">
+        select username from t_account where id=#{id}
+    </select>
+
+    <!--<select id="findByAccount" parameterType="com.fxc.entity.Account" resultType="com.fxc.entity.Account">
+        select * from t_account
+        <where>
+            <if test="username != null">
+                username=#{username}
+            </if>
+            <if test="password != null">
+                and password=#{password}
+            </if>
+            <if test="age>=1">
+                and age=#{age}
+            </if>
+        </where>
+    </select>-->
+    <!--<select id="findByAccount" parameterType="com.fxc.entity.Account" resultType="com.fxc.entity.Account">
+        select * from t_account
+        <where>
+            <choose>
+                <when test="id!=0">
+                    id=#{id}
+                </when>
+                <when test="username!=null">
+                    username=#{username}
+                </when>
+                <when test="password!=null">
+                    password=#{password}
+                </when>
+                <when test="age!=0">
+                    age=#{age}
+                </when>
+            </choose>
+        </where>
+    </select>-->
+
+    <select id="findByAccount" parameterType="com.fxc.entity.Account" resultType="com.fxc.entity.Account">
+        select * from t_account
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id!=0">
+                id=#{id}
+            </if>
+            <if test="username!=null">
+                and username=#{username}
+            </if>
+            <if test="password">
+                and password=#{password}
+            </if>
+            <if test="age!=0">
+                and age=#{age}
+            </if>
+        </trim>
+    </select>
+
+    <select id="findByIds" parameterType="com.fxc.entity.Account" resultType="com.fxc.entity.Account">
+        select * from t_account
+        <where>
+            <foreach collection="ids" open="id in (" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>
