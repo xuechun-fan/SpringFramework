@@ -5,6 +5,7 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <!-- 处理中文乱码问题 -->
   <filter>
     <filter-name>encoding</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -29,5 +30,11 @@
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!-- 作用是：将*.js的请求交给默认拦截器处理，不让DispatcherServlet拦截器处理 -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
   </servlet-mapping>
 </web-app>

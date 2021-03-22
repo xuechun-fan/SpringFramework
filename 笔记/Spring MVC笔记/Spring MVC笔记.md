@@ -604,7 +604,7 @@ JSP
                contentType:"application/json;charset=UTF-8",
                dataType:"JSON",
                success:function(data){
-                   alter(data.id+"---"+data.name);
+                   alert(data.id+"---"+data.name);
                }
            })
         });
