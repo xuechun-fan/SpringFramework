@@ -178,7 +178,7 @@ public class ViewHandler {
         return "view";
     }
 
-    @RequestMapping("/seesion2")
+    @RequestMapping("/session2")
     public String session2(HttpSession session){
         User user = new User();
         user.setId(21);
