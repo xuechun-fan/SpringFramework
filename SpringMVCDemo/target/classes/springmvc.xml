@@ -9,7 +9,8 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
-    <mvc:annotation-driven>
+
+    <mvc:annotation-driven conversion-service="conversionService" validator="accountValidator"> <!--  -->
         <!--  消息转换器  -->
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -21,13 +22,33 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <mvc:annotation-driven></mvc:annotation-driven>
+
 
     <!-- ⾃自动扫描 -->
     <context:component-scan base-package="com.fxc"></context:component-scan>
+
     <!-- 配置视图解析器器 -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!-- 配置自定义验证器 -->
+    <bean id="accountValidator" class="com.fxc.Validator.AccountValidator"></bean>
+
+    <!-- 配置上传组件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+    <!--  配置自定义转换器  -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.fxc.converter.DataConverter">
+                    <constructor-arg type="java.lang.String" value="yyyy-MM-dd"/>
+                </bean>
+                <bean class="com.fxc.converter.StudentConverter"/>
+            </list>
+        </property>
     </bean>
 </beans>

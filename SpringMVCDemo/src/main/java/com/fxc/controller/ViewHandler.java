@@ -1,15 +1,18 @@
 package com.fxc.controller;
 
+import com.fxc.entities.Address;
 import com.fxc.entities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import javax.jws.WebParam;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -20,6 +23,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/view")
+//@SessionAttributes(types = {User.class, Address.class})
 public class ViewHandler {
     @RequestMapping("/map")
     public String map(Map<String, User> map){
@@ -184,6 +188,17 @@ public class ViewHandler {
         user.setId(21);
         user.setName("Session2");
         session.setAttribute("user", user);
+        return "view";
+    }
+
+    //  将模型数据绑定到 application 对象
+    @RequestMapping("/application")
+    public String application(HttpServletRequest request){
+        ServletContext application = request.getServletContext();
+        User user = new User();
+        user.setId(12);
+        user.setName("奥特曼");
+        application.setAttribute("user", user);
         return "view";
     }
 

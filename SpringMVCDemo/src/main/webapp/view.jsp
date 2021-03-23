@@ -16,6 +16,8 @@
     ${requestScope.user}
     <hr>
     ${sessionScope.user}
+    <hr>
+    ${applicationScope.user}
 
 </body>
 </html>
