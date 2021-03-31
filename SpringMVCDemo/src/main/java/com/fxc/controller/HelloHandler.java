@@ -51,12 +51,12 @@ public class HelloHandler {
 
     @RequestMapping("/forward")
     public String forward(){
-        return "forward:/index.jsp";
+        return "forward:/forwardTest.jsp";    //  转发
     }
 
     @RequestMapping("/redirect")
     public String redirect(){
-        return "redirect:/index.jsp";
+        return "redirect:/redirectTest.jsp";   //  重定向
     }
 
 }
