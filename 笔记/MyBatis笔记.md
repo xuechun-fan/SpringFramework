@@ -6,6 +6,8 @@ ORMapping： Object Relationship Mapping
 
 Java到Mysql的映射，开发者可以以面向对象的思想来管理数据库。
 
+![image-20210403144125958](C:\Users\FXC\AppData\Roaming\Typora\typora-user-images\image-20210403144125958.png)
+
 #### 如何使用
 
 - 新建Maven工程， pom.xml文件中添加相关依赖
@@ -29,15 +31,16 @@ Java到Mysql的映射，开发者可以以面向对象的思想来管理数据�
 
   ```mysql
   use fxc;
-  create table t_account{
-  	id int primary key auto_increment,
-  	username varchar(11),
-  	password varchar(11),
-  	age int
-  }
+  create table t_account
+  (
+      id       int primary key auto_increment,
+      username varchar(11),
+      password varchar(11),
+      age      int
+  );
   ```
 
-- 新建数据表对应的实体类Account
+- 新建数据表对应的**实体类Account**
 
   ```Java
   package com.fxc.entity;
@@ -82,7 +85,7 @@ Java到Mysql的映射，开发者可以以面向对象的思想来管理数据�
 
 1、MyBatis 框架需要开发者自定义SQL语句，写在Mapper.xml 文件中，实际开发中，会为每个实体类创建对应的Mapper.xml ， 定义管理该对象数据的 SQL。
 
-        ```xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -95,7 +98,10 @@ Java到Mysql的映射，开发者可以以面向对象的思想来管理数据�
 <!--    <delete id=""></delete>-->
 <!--    <select id=""></select>-->
 </mapper>
-        ```
+```
+
+
+
 
 - namespace 通常设置为文件所在包+文件名的形式
 - insert 标签表示执行添加操作

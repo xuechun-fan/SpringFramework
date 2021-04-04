@@ -6,7 +6,7 @@
     <insert id="save" parameterType="com.fxc.entity.Account">
         insert into t_account(username, password, age) values(#{username}, #{password}, #{age})
     </insert>
-<!--    <update id=""></update>-->
-<!--    <delete id=""></delete>-->
-<!--    <select id=""></select>-->
+    <!--    <update id=""></update>  -->
+    <!--    <delete id=""></delete>  -->
+    <!--    <select id=""></select>  -->
 </mapper>
