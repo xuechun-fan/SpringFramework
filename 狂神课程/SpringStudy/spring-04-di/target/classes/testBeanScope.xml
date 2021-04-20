@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--在bean标签中，使用scope字段显式声明为单例模式(默认就是单例模式）-->
+    <bean id="instanceSingleton" class="com.fxc.pojo.User" scope="singleton">
+        <property name="name" value="莉莉"/>
+        <property name="age" value="18"/>
+    </bean>
+
+    <!--在bean标签中，使用scope字段显式声明为prototype模式，则创建出的对象都是独立的-->
+    <bean id="instancePrototype" class="com.fxc.pojo.User" scope="prototype">
+        <property name="name" value="莉莉"/>
+        <property name="age" value="18"/>
+    </bean>
+
+</beans>

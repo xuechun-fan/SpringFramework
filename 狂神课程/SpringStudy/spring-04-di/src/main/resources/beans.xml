@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="addr" class="com.fxc.pojo.Address">
+        <property name="address" value="大连海事大学"/>
+    </bean>
+
+    <bean id="student" class="com.fxc.pojo.Student">
+        <!-- 第一种，普通值注入，直接使用property标签中的value字段 -->
+        <property name="name" value="张三"/>
+
+        <!--第二种，Bean注入，使用ref字段-->
+        <property name="address" ref="addr"/>
+
+        <!--第三种，数组注入-->
+        <property name="books">
+            <array>
+                <value>红楼梦</value>
+                <value>西游记</value>
+                <value>水浒传</value>
+                <value>三国演义</value>
+            </array>
+        </property>
+
+        <!--第四种，List注入-->
+        <property name="hobby">
+            <list>
+                <value>听音乐</value>
+                <value>打篮球</value>
+                <value>看电影</value>
+            </list>
+        </property>
+
+        <!--第五种，Map注入-->
+        <property name="card">
+            <map>
+                <entry key="身份证" value="121212111111111111"/>
+                <entry key="银行卡" value="43577853478973946892"/>
+            </map>
+        </property>
+
+        <!--第五种，Set注入-->
+        <property name="games">
+            <set>
+                <value>LOL</value>
+                <value>PUBG</value>
+            </set>
+        </property>
+
+        <!--第六种：null值注入-->
+        <property name="wife" value=""/>
+        
+        <!--第六种：Properties注入-->
+        <property name="info">
+            <props>
+                <prop key="学号">2220141093</prop>
+                <prop key="语文">99</prop>
+                <prop key="数学">103</prop>
+            </props>
+        </property>
+
+    </bean>
+</beans>

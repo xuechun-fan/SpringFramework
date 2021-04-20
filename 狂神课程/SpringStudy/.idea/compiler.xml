@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-03-ioc2" />
+        <module name="spring-06-annotation" />
+        <module name="spring-02-hellospring" />
+        <module name="spring-01-ioc1" />
+        <module name="spring-04-di" />
+        <module name="spring-05-Autowired" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SpringStudy" options="" />
+      <module name="spring-01-ioc1" options="" />
+      <module name="spring-02-hellospring" options="" />
+      <module name="spring-03-ioc2" options="" />
+      <module name="spring-04-di" options="" />
+      <module name="spring-05-Autowired" options="" />
+      <module name="spring-06-annotation" options="" />
+    </option>
+  </component>
+</project>
