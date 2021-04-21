@@ -7,12 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-03-ioc2" />
-        <module name="spring-06-annotation" />
         <module name="spring-02-hellospring" />
-        <module name="spring-01-ioc1" />
         <module name="spring-04-di" />
+        <module name="spring-10-mybatis" />
+        <module name="spring-03-ioc2" />
+        <module name="spring-09-aop" />
+        <module name="spring-06-annotation" />
+        <module name="spring-07-appconfig" />
+        <module name="spring-01-ioc1" />
         <module name="spring-05-Autowired" />
+        <module name="spring-08-proxy" />
       </profile>
     </annotationProcessing>
   </component>
@@ -26,6 +30,10 @@
       <module name="spring-04-di" options="" />
       <module name="spring-05-Autowired" options="" />
       <module name="spring-06-annotation" options="" />
+      <module name="spring-07-appconfig" options="" />
+      <module name="spring-08-proxy" options="" />
+      <module name="spring-09-aop" options="" />
+      <module name="spring-10-mybatis" options="" />
     </option>
   </component>
 </project>

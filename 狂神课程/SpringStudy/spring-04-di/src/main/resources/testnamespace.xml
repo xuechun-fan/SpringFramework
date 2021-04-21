@@ -7,8 +7,8 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--p命名空间直接注入属性-->
-    <bean id="user" class="com.fxc.pojo.User" p:name="李四" p:age="23"/>
+    <bean id="user" class="com.fxc.com.fxc.pojo.User" p:name="李四" p:age="23"/>
 
     <!--p命名空间直接注入属性-->
-    <bean id="user2" class="com.fxc.pojo.User" c:name="王五" c:age="65"/>
+    <bean id="user2" class="com.fxc.com.fxc.pojo.User" c:name="王五" c:age="65"/>
 </beans>

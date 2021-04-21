@@ -115,7 +115,7 @@ Java到Mysql的映射，开发者可以以面向对象的思想来管理数据�
 
 ```xml
 <!--  注册AccountMapper.xml  -->
-    <mappers>
+<mappers>
     <mapper resource="com/fxc/mapper/AccountMapper.xml"></mapper>
 </mappers>
 ```

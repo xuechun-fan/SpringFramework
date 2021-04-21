@@ -567,3 +567,379 @@ public class People{
 
      
 
+## 9、使用Java的方式配置Spring
+
+实体类：
+
+```java
+@Component  //  这里这个注解的意思就是说明这个类被spring接管了，注册到了容器中
+public class User {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    @Value("张三")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+```
+
+配置类：
+
+```java
+@Configuration  //这个也会被Spring容器托管，注册到容器中，因为他内部也是一个@Component
+                //@Configuration代表这是一个配置类，就和我们之前看的beans.xml一样
+@ComponentScan("com.fxc.pojo")
+@Import(UserConfig2.class)      //  对应于 import 标签
+public class UserConfig {
+    //  注册一个bean，就相当于xml配置文件中的<bean>标签
+    //  方法名---》id
+    //  返回值---》标签class
+    @Bean
+    public User user(){
+        return new User();
+    }
+}
+```
+
+测试：
+
+```java
+@Test
+public void test1(){
+    //如果完全使用了配置类的方式，我们就只能使用AnnotationConfigApplicationContext上下文来获取容器，通过
+    //配置类的class对象来加载
+    ApplicationContext context = new AnnotationConfigApplicationContext(UserConfig.class);
+    User user = (User)context.getBean("user");
+    System.out.println(user.getName());
+}
+```
+
+这种纯Java的配置方式，在Springboot中随处可见
+
+## 10、代理模式
+
+### 10.1、静态代理
+
+角色分析：
+
+- 抽象角色：一般会使用接口或者抽象类来解决
+- 真实角色：被代理的角色
+- 代理角色：代理真实角色，代理真实角色后，我们一般会做一些扩展操作
+- 客户：访问代理对象的角色
+
+代理模式好处：
+
+- 可以使真实角色的操作更加纯粹！不用去关注一些公共的业务
+- 公共业务交给了代理角色！实现了业务的分工！
+- 公共业务发生扩展的时候，方便集中管理！
+
+缺点：
+
+- 一个真实的角色就会产生一个代理角色；代码量会翻倍，开发效率会变低。
+
+**代码示例：**
+
+```java
+//	抽象角色
+public interface Rent {
+    public void rent();
+}
+
+//	真实角色
+public class Host implements Rent{
+    public void rent() {
+        System.out.println("房东要出租房子");
+    }
+}
+
+//	代理角色
+public class Proxy implements Rent{
+    private Host host;
+
+    public Proxy() {
+    }
+
+    public Proxy(Host host) {
+        this.host = host;
+    }
+
+    public void rent() {
+        fare();
+        seeHouse();
+        heTong();
+        host.rent();
+    }
+
+    //  看房
+    public void seeHouse(){
+        System.out.println("中介带你看房子");
+    }
+
+    //  收中介费
+    public void fare(){
+        System.out.println("收中介费");
+    }
+
+    //  签合同
+    public void heTong(){
+        System.out.println("签租赁合同");
+    }
+}
+
+//	客户
+public class Client {
+    public static void main(String[] args) {
+        Host host = new Host();
+        Proxy proxy = new Proxy(host);
+        proxy.rent();
+    }
+}
+```
+
+### 10.2、动态代理
+
+- 动态代理和静态代理角色一样
+- 动态代理的代理类是动态生成的，不是我们直接写好的！
+- 动态代理分为两大类：基于接口的动态代理，基于类的动态代理
+  1. 基于接口---JDK动态代理【重要】
+  2. 基于类：Cglib类库
+  3. java字节码实现：javasist
+
+JDK动态代理需要实现InvocationHandler接口和使用Proxy代理类。
+
+动态代理的优点：
+
+- 可以使真实角色的操作更加纯粹！不用去关注一些公共的业务
+- 公共业务交给了代理角色！实现了业务的分工！
+- 公共业务发生扩展的时候，方便集中管理！
+- 一个动态代理类代理的是一个接口，一般就是对应的一类业务
+- 一个动态代理类可以代理多个类，只要实现了同一个接口即可
+
+```java
+public class ProxyInvocationHandler implements InvocationHandler {
+    //  被代理的接口
+    private Object target;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    //  生成得到代理类
+    public Object getProxy(){
+        return Proxy.newProxyInstance(
+                this.getClass().getClassLoader(),
+                target.getClass().getInterfaces(),
+                this
+        );
+    }
+
+    //  处理代理实例，并返回代理实例
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+        log(method.getName());	//	对被代理类方法的扩展
+        //  动态代理的本质就是使用反射机制实现
+        Object invoke = method.invoke(target, args);
+
+        return invoke;
+    }
+
+    //  日志方法
+    public void log(String msg){
+        SimpleDateFormat format = new SimpleDateFormat();
+        System.out.println("【Debug】:" + sdf.format(new Date()) + " 执行了" + msg + "方法");
+    }
+
+}
+```
+
+```java
+public class Client {
+    public static void main(String[] args) {
+        //  真实角色
+        UserService userService = new UserServiceImpl();
+
+        //  代理角色
+        ProxyInvocationHandler handler = new ProxyInvocationHandler();
+        //  设置要代理的对象
+        handler.setTarget(userService);
+        //  动态生成代理类
+        UserService proxy = (UserService) handler.getProxy();
+        proxy.delete();
+        proxy.add();
+    }
+}
+```
+
+## 11、AOP
+
+### 11.1、什么是AOP
+
+AOP（Aspect Oriented Programming）意为：面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
+
+![image-20210421171357801](E:\Github\Spring框架\狂神课程\typro\image-20210421171357801.png)
+
+### 11.2、AOP在Spring中的作用
+
+### 11.3、使用Spring实现AOP
+
+【重点】使用AOP，需要导入一个依赖包
+
+```xml
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.4</version>
+</dependency>
+```
+
+**方式一：使用Spring的API接口【主要SpringAPI接口实现】**
+
+```java
+public class Log implements MethodBeforeAdvice {
+    /**
+     * @param method:要执行的目标对象的方法
+     * @param objects：method方法的参数
+     * @param o：目标对象
+     * @throws Throwable
+     */
+    public void before(Method method, Object[] objects, Object o) throws Throwable {
+        System.out.println(o.getClass().getName() + " 的 " + method.getName() + " 方法被执行了 ");
+    }
+}
+
+public class AfterLog implements AfterReturningAdvice {
+    public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
+        System.out.println("执行了方法" +
+                method.getName() +
+                "，并返回了：" + returnValue);
+    }
+}
+```
+
+
+
+```xml
+<!--方式一：使用y原生Spring API接口-->
+<!--配置aop:需要导入aop的约束-->
+<aop:config>
+    <!--切入点：expression：表达式， execution（要执行的位置!****）-->
+    <aop:pointcut id="pointCut" expression="execution(* com.fxc.service.UserServiceImpl.*(..))"/>
+
+    <!--执行环绕增加！-->
+    <aop:advisor advice-ref="log" pointcut-ref="pointCut"/>
+    <aop:advisor advice-ref="afterLog" pointcut-ref="pointCut"/>
+</aop:config>
+```
+
+**方式二：自定义来实现AOP【主要是切面定义】**
+
+```java
+public class DiyPoint {
+    public void before(){
+        System.out.println("============方法执行前============");
+    }
+
+    public void after(){
+        System.out.println("************方法执行前************");
+    }
+}
+```
+
+```xml
+<!--方式二：自定义类-->
+<bean id="diy" class="com.fxc.diy.DiyPoint"/>
+<aop:config>
+    <!--自定义切面，ref 要引用的类-->
+    <aop:aspect ref="diy">
+        <!--切入点-->
+        <aop:pointcut id="point" expression="execution(* com.fxc.service.UserService.*(..))"/>
+        <!--通知-->
+        <aop:before method="before" pointcut-ref="point"/>
+        <aop:after method="after" pointcut-ref="point"/>
+    </aop:aspect>
+</aop:config>
+```
+
+**方式三：使用注解实现**
+
+```java
+/**
+ * 使用注解实现AOP
+ */
+@Aspect //标注这个类是一个切面
+public class AnnotationPointCut {
+    @Before("execution(* com.fxc.service.UserService.*(..))")
+    public void before(){
+        System.out.println("============方法执行前============");
+    }
+
+    @After("execution(* com.fxc.service.UserService.*(..))")
+    public void after(){
+        System.out.println("************方法执行后************");
+    }
+    //  在环绕增强中，我们可以给定一个参数，代表我们获取处理切入的点
+    @Around("execution(* com.fxc.service.UserService.*(..))")
+    public void around(ProceedingJoinPoint point){
+        System.out.println("-------环绕前-------");
+        try {
+            //  执行方法
+            Object proceed = point.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        System.out.println("***********环绕后***********");
+    }
+}
+```
+
+```xml
+<!--方式三：使用注解方式实现AOP-->
+<bean id="annotationPointCut" class="com.fxc.diy.AnnotationPointCut"/>
+<!--开启注解支持！！！  JDK：(默认  proxy-target-class="false")  cglib：(proxy-target-class="true")-->
+<aop:aspectj-autoproxy />
+```
+
+
+
+12、整合Mybatis
+
+步骤：
+
+1. 导入相关jar包
+   - junit
+   - mybatis
+   - mysql数据库
+   - spring相关的
+   - aop织入
+   - **mybatis-spring【新知识点】**
+2. 编写配置文件
+3. 测试
+
+### 12.1、回忆mybatis
+
+1. 编写实体类
+2. 编写核心配置文件
+3. 编写接口
+4. 编写Mapper.xml文件
+5. 测试
+
+### 12.2、整合Mybatis
+
+1. 编写数据源配置
+2. sqlSessionFactory
+3. sqlSessionTemplate
+4. 需要给接口加实现类
+5. 将自己写的实现类，注入到Spring容器中
+6. 测试使用即可
