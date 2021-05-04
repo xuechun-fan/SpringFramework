@@ -1,5 +1,5 @@
 ## 常规依赖
-```
+```xml
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-webmvc</artifactId>

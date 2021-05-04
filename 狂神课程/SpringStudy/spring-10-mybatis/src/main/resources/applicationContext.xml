@@ -11,4 +11,8 @@
     <bean id="empMapper" class="com.fxc.mapper.EmpMapperImpl">
         <property name="sqlSession" ref="sqlSession"/>
     </bean>
+
+    <bean id="empMapper2" class="com.fxc.mapper.EmpMapperImpl2">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 </beans>

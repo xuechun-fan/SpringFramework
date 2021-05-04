@@ -930,16 +930,164 @@ public class AnnotationPointCut {
 ### 12.1、回忆mybatis
 
 1. 编写实体类
+
+   
+
 2. 编写核心配置文件
+
+   
+
 3. 编写接口
+
+   ```java
+   public interface EmpMapper {
+       public List<Emp> selectEmp();
+   }
+   ```
+
 4. 编写Mapper.xml文件
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE mapper
+           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+           "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="com.fxc.mapper.EmpMapper">
+       <select id="selectEmp" resultType="com.fxc.pojo.Emp">
+           select * from mydb.t_emp;
+       </select>
+   </mapper>
+   ```
+
 5. 测试
 
 ### 12.2、整合Mybatis
 
 1. 编写数据源配置
+
+   ```xml
+   <!-- DataSource:使用Spring的数据源替换Mybatis的配置 c3p0 dbcp druid -->
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+       <property name="url" value="jdbc:mysql://172.27.100.96:3306/mydb?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+       <property name="username" value="root"/>
+       <property name="password" value="333"/>
+   </bean>
+   ```
+
 2. sqlSessionFactory
+
+   ```xml
+   <!-- sqlSessionFactory-->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource"/>
+       <!--绑定Mybatis配置-->
+       <property name="configLocation" value="classpath:mybatis-config.xml"/>
+       <property name="mapperLocations" value="classpath*:com/fxc/mapper/*.xml"/>
+   </bean>
+   ```
+
 3. sqlSessionTemplate
+
+   ```xml
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+       <!--只能用构造器注入sqlSessionFactory，因为他没有setter方法-->
+       <constructor-arg  ref="sqlSessionFactory"/>
+   </bean>
+   ```
+
+   
+
 4. 需要给接口加实现类
+
+   ```java
+   public class EmpMapperImpl implements EmpMapper{
+       //  我们的所有操作，都是sqlSession来执行，在原来，现在都是用SqlSessionTemplate;
+       private SqlSessionTemplate sqlSession;
+   
+       public void setSqlSession(SqlSessionTemplate sqlSession) {
+           this.sqlSession = sqlSession;
+       }
+   
+       public List<Emp> selectEmp() {
+           EmpMapper mapper = sqlSession.getMapper(EmpMapper.class);
+           return mapper.selectEmp();
+       }
+   }
+   ```
+
 5. 将自己写的实现类，注入到Spring容器中
+
+   ```xml
+   <bean id="empMapper" class="com.fxc.mapper.EmpMapperImpl">
+       <property name="sqlSession" ref="sqlSession"/>
+   </bean>
+   ```
+
+   
+
 6. 测试使用即可
+
+Note：还可以通过编写Mapper实现类继承自SqlSessionDaoSupport类来方便获取sqlSession对象
+
+```java
+public class EmpMapperImpl2 extends SqlSessionDaoSupport implements EmpMapper {
+    public List<Emp> selectEmp() {
+        return getSqlSession().getMapper(EmpMapper.class).selectEmp();
+    }
+}
+```
+
+```xml
+<bean id="empMapper2" class="com.fxc.mapper.EmpMapperImpl2">
+    <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+</bean>
+```
+
+## 13、声明式事务
+
+### 13.1、回顾事务
+
+1. 把一组业务当成一个业务来做，要么都成功，要么都失败
+2. 事务在项目开发中，十分重要，涉及到数据的一致性问题，不能马虎
+3. 确保完整性和一致性
+
+**事务ACID原则：**
+
+- A：Atomic 原子性
+- C：Consistent 一致性
+- I：Isolation 隔离性
+  - 多个业务可能操作同一个资源，防止数据损坏
+- D：Duration 持久性
+  - 事务一旦提交，无论系统发生什么问题，结果都不会再被影响，被持久化地写到存储器中
+
+### 13.2、Spring中事务管理
+
+- 声明式事务：AOP
+- 编程式事务：需要在代码中进行事务地管理
+
+```xml
+<!--配置声明式事务-->
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+</bean>
+
+<!--结合AOP实现事务地织入-->
+<!--配置事务地类-->
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <!--给哪些方法配置事务-->
+    <tx:attributes>
+        <!-- <tx:method name="addEmp" propagation="REQUIRED"/> -->
+        <!-- <tx:method name="deleteEmp"/> -->
+        <tx:method name="*"/>
+    </tx:attributes>
+</tx:advice>
+
+<!--配置事务切入-->
+<aop:config>
+    <!--配置事务切入点-->
+    <aop:pointcut id="txPointCut" expression="execution(* com.fxc.mapper.*.*(..))"/>
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+</aop:config>
+```
+

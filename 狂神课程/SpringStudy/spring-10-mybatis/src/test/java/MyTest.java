@@ -50,7 +50,7 @@ public class MyTest {
     @Test
     public void test2(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        EmpMapper mapper = (EmpMapper) context.getBean("empMapper");
+        EmpMapper mapper = (EmpMapper) context.getBean("empMapper2");
         List<Emp> emps = mapper.selectEmp();
         for(Emp emp:emps){
             System.out.println(emp);
