@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!-- 有一个父项目 -->
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -10,22 +10,19 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fxc</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>springboot-02-config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>springboot-02-config</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <!-- web依赖： tomcat、dispatcherServlet、xml -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--    所有的springboot依赖都是以spring-boot-starter开头的    -->
-        <!-- 单元测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -34,7 +31,6 @@
     </dependencies>
 
     <build>
-        <!--打jar包插件-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

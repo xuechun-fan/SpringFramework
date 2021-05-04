@@ -1,10 +1,10 @@
-package com.fxc.demo;
+package com.fxc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class Springboot02ConfigApplicationTests {
 
     @Test
     void contextLoads() {

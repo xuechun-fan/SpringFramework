@@ -1,15 +1,13 @@
-package com.fxc.demo;
+package com.fxc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-//  程序的主入口
 @SpringBootApplication
-public class DemoApplication {
+public class Springboot02ConfigApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(Springboot02ConfigApplication.class, args);
     }
 
 }
