@@ -2,6 +2,7 @@ package com.fxc.dao;
 
 import com.fxc.pojo.Department;
 import com.fxc.pojo.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -14,15 +15,17 @@ public class EmployeeDao {
     //  模拟数据库
     private static Map<Integer, Employee> employees = null;
 
+
     //  员工有所属的部门
+    @Autowired
     private DepartmentDao departmentDao;
     static{
         employees = new HashMap<>();
-        employees.put(101, new Employee(1001, "A", "aaaa@qq.com", 1, new Department(101, "研发部")));
-        employees.put(102, new Employee(1002, "B", "bbbb@qq.com", 0, new Department(102, "研发部")));
-        employees.put(103, new Employee(1003, "C", "cccc@qq.com", 1, new Department(103, "教学部")));
-        employees.put(104, new Employee(1004, "D", "dddd@qq.com", 1, new Department(104, "研发部")));
-        employees.put(105, new Employee(1005, "E", "eeee@qq.com", 0, new Department(105, "销售部")));
+        employees.put(1001, new Employee(1001, "小王", "aaaa@qq.com", 1, new Department(101, "研发部")));
+        employees.put(1002, new Employee(1002, "小李", "bbbb@qq.com", 0, new Department(102, "研发部")));
+        employees.put(1003, new Employee(1003, "小张", "cccc@qq.com", 1, new Department(103, "教学部")));
+        employees.put(1004, new Employee(1004, "小范", "dddd@qq.com", 1, new Department(104, "研发部")));
+        employees.put(1005, new Employee(1005, "小沈", "eeee@qq.com", 0, new Department(105, "销售部")));
     }
     //  主键自增
     private static Integer initId = 1006;
@@ -30,6 +33,7 @@ public class EmployeeDao {
     //  增加一个员工
     public void save(Employee employee){
         if(employee.getId()==null){
+//            System.out.println("[debug] ==> save");
             employee.setId(initId++);
         }
         employee.setDepartment(departmentDao.getDepartmentById(employee.getDepartment().getId()));

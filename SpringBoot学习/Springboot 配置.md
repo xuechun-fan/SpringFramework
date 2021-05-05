@@ -91,3 +91,21 @@ public static final String DEFAULT_SUFFIX = ".html";
 
    `th:href="@{/index.html?(l=zh_CN)}"` `th:placeholder="#{login.password}"`
 
+### 6、登陆 + 拦截器
+
+### 7、员工列表展示
+
+1. 提取公共页面
+    - `th:fragment='sidebar'`
+    - `th:replace="~{commons/commons::sidebar}"`
+    - 如果需要传递参数，可以直接使用`()`传参，接收判断即可。判断多用三元表达式。`th:replace="~{commons/commons::sidebar(param='value')}"`
+2. 列表循环展示
+    1. 按钮提交
+    2. 跳转到添加页面
+    3. 添加员工成功
+    4. 返回员工信息页面
+
+**CRUD搞定了**
+
+### 8、404处理
+
