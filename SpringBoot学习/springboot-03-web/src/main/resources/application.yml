@@ -1,0 +1,12 @@
+# 自定义的配置日期格式化
+#spring:
+#  mvc:
+#    format:
+#      date-time: yyyy-MM-dd HH:mm:ss
+
+# 关闭模板引擎的缓存
+spring:
+  thymeleaf:
+    cache: false
+  messages:
+    basename: i18n.login
