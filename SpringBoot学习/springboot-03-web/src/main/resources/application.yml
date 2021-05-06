@@ -15,4 +15,4 @@ spring:
       date: yyyy-MM-dd
 
 server:
-  port: 8888
+  port: 8080
