@@ -17,23 +17,23 @@ public class DepartmentDao {
     @Autowired
     private DepartmentMapper departmentMapper;
 
-    public List<Department> queryDeptList(){
+    public List<Department> queryDeptList() {
         return departmentMapper.queryDeptList();
     }
 
-    public Department queryDeptById(Integer id){
+    public Department queryDeptById(Integer id) {
         return departmentMapper.queryDeptById(id);
     }
 
-    public int addDept(Department department){
+    public int addDept(Department department) {
         return departmentMapper.addDept(department);
     }
 
-    public int updateDept(Department department){
+    public int updateDept(Department department) {
         return departmentMapper.updateDept(department);
     }
 
-    int deleteDept(Integer id){
+    int deleteDept(Integer id) {
         return departmentMapper.deleteDept(id);
     }
 }

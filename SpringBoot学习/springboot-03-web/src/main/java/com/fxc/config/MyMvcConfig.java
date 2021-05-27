@@ -25,7 +25,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 
     //  自定义的国际化就生效了
     @Bean
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         return new MyLocaleResolver();
     }
 

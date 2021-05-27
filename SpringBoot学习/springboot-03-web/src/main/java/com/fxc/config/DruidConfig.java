@@ -19,14 +19,14 @@ public class DruidConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
 
     @Bean
-    public DataSource druidDataSource(){
+    public DataSource druidDataSource() {
         return new DruidDataSource();
     }
 
     //  后台监控功能:web.xml, ServletRegistrationBean
     //  因为SpringBoot 内置了 servlet 容器，所以没有 web.xml， 替代方法：ServletRegistrationBean注册进去 @Bean
     @Bean
-    public ServletRegistrationBean statViewServlet(){
+    public ServletRegistrationBean statViewServlet() {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         //  后台需要有人登录，账号密码配置
         HashMap<String, String> initParameters = new HashMap<>();
@@ -44,7 +44,7 @@ public class DruidConfig {
 
     //  拦截器
     @Bean
-    public FilterRegistrationBean webStatFilter(){
+    public FilterRegistrationBean webStatFilter() {
         FilterRegistrationBean bean = new FilterRegistrationBean();
 
         bean.setFilter(new WebStatFilter());

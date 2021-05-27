@@ -13,6 +13,7 @@ class Springboot04DataApplicationTests {
 
     @Autowired
     DataSource dataSource;
+
     @Test
     void contextLoads() throws SQLException {
         //  查看默认的数据源

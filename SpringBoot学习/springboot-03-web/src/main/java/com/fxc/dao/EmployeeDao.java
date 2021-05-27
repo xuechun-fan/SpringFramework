@@ -16,27 +16,27 @@ public class EmployeeDao {
     @Autowired
     private EmployeeMapper employeeMapper;
 
-    public List<Employee> queryEmpList(){
+    public List<Employee> queryEmpList() {
         return employeeMapper.queryEmpList();
     }
 
     //  根据id查询
-    public Employee queryEmpById(Integer id){
+    public Employee queryEmpById(Integer id) {
         return employeeMapper.queryEmpById(id);
     }
 
     //  增
-    public int addEmp(Employee employee){
+    public int addEmp(Employee employee) {
         return employeeMapper.addEmp(employee);
     }
 
     //  改
-    public int updateEmp(Employee employee){
+    public int updateEmp(Employee employee) {
         return employeeMapper.updateEmp(employee);
     }
 
     //  删
-    public int deleteEmpById(Integer id){
+    public int deleteEmpById(Integer id) {
         return employeeMapper.deleteEmpById(id);
     }
 
