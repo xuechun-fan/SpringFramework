@@ -117,3 +117,76 @@ public static final String DEFAULT_SUFFIX = ".html";
 
 ### 10、Mybatis
 
+**将数据库整合到web小系统**
+
+首先引入依赖：
+
+```xml
+<!--druid-->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid-spring-boot-starter</artifactId>
+    <version>1.2.4</version>
+</dependency>
+<!--log4j日志组件-->
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+<!--JDBC-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency>
+<!--Mybatis-->
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>2.1.4</version>
+</dependency>
+<!--MySQL驱动-->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+然后在application.yaml文件中配置数据源、数据库池druid相关参数
+
+```yaml
+spring:
+  # 数据源配置
+  datasource:
+    username: root
+    password: 333
+    # 假如时区报错了，增加一个时区的配置：serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/fxc?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #    initialSize: 5
+    # Spring Boot 默认是不注入这些属性的，需要自己绑定
+    # Druid 数据源专有配置
+    initialSize: 5
+    minSdle:
+    maxActive: 20
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # 配置监控统计拦截的 filters   stat:监控统计  log4j：日志记录  wall：防御sql注入
+    # 如果允许时报错，java.lang.ClassNotFoundException:org.apache.log4j.Priority
+    # 则导入 log4j 依赖即可
+    filters: stat, wall, log4j
+
+    # 数据库连接池相关参数配置
+    druid:
+      max-pool-prepared-statement-per-connection-size: 20
+      use-global-data-source-stat: true
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+```
+

@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//  部门表
 public class Department {
     private Integer id;
-    private String departmentName;
+    private String deptName;
 }

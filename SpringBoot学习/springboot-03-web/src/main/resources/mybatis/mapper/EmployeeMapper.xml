@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxc.mapper.EmployeeMapper">
+
+<!--    <resultMap id="empList" type="com.fxc.pojo.Employee">-->
+<!--        <id property="id" column="id"/>-->
+<!--        <result property="name" column="name"/>-->
+<!--        <result property="email" column="email"/>-->
+<!--        <result property="gender" column="gender"/>-->
+<!--        <result property="birth" column="birth"/>-->
+<!--        <association property="department" javaType="com.fxc.pojo.Department"-->
+<!--        select="com.fxc.dao.DepartmentDao.queryDeptById"/>-->
+<!--    </resultMap>-->
+<!--    <select id="queryEmpList" resultMap="empList">-->
+<!--        select * from fxc.t_emp;-->
+<!--    </select>-->
+
+    <select id="queryEmpList" resultType="com.fxc.pojo.Employee">
+        select * from fxc.t_emp;
+    </select>
+
+    <select id="queryEmpById" resultType="Employee">
+        select * from t_emp where id=#{id}
+    </select>
+
+    <insert id="addEmp" parameterType="Employee">
+        insert into t_emp (name, email, gender, department, birth) values (#{name}, #{email}, #{gender}, #{department}, #{birth})
+    </insert>
+
+    <update id="updateEmp" parameterType="Employee">
+        update t_emp set name=#{name}, email=#{email}, gender=#{gender}, department=#{department}, birth=#{birth} where id=#{id}
+    </update>
+
+    <delete id="deleteEmpById" parameterType="Integer">
+        delete from t_emp where id=#{id}
+    </delete>
+</mapper>

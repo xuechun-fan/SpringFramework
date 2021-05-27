@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxc.mapper.DepartmentMapper">
+    <select id="queryDeptList" resultType="com.fxc.pojo.Department">
+        select * from t_dept;
+    </select>
+
+    <select id="queryDeptById" resultType="Department">
+        select * from t_dept where id=#{id}
+    </select>
+
+    <insert id="addDept" parameterType="Department">
+        insert into t_dept (deptName) values (#{deptName})
+    </insert>
+
+    <update id="updateDept" parameterType="Department">
+        update t_dept set deptName=#{name} where id=#{id}
+    </update>
+
+    <delete id="deleteDept" parameterType="Integer">
+        delete from t_dept where id=#{id}
+    </delete>
+</mapper>

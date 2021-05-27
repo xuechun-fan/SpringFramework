@@ -1,35 +1,39 @@
 package com.fxc.dao;
 
+import com.fxc.mapper.DepartmentMapper;
 import com.fxc.pojo.Department;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //  部门Dao
 @Repository
 public class DepartmentDao {
-    //  初始化数据。模拟数据库中的数据
 
-    private static Map<Integer, Department> departments = null;
+    @Autowired
+    private DepartmentMapper departmentMapper;
 
-    static{
-        departments = new HashMap<>();  //  创建一个部门表
-        departments.put(101, new Department(101, "教学部"));
-        departments.put(102, new Department(102, "教研部"));
-        departments.put(103, new Department(103, "运营部"));
-        departments.put(104, new Department(104, "研发部"));
-        departments.put(105, new Department(105, "销售部"));
+    public List<Department> queryDeptList(){
+        return departmentMapper.queryDeptList();
     }
 
-    //  获得所有部门信息
-    public Collection<Department> getDepartments(){
-        return departments.values();
+    public Department queryDeptById(Integer id){
+        return departmentMapper.queryDeptById(id);
     }
 
-    //  通过id得到部门
-    public Department getDepartmentById(Integer id){
-        return departments.get(id);
+    public int addDept(Department department){
+        return departmentMapper.addDept(department);
+    }
+
+    public int updateDept(Department department){
+        return departmentMapper.updateDept(department);
+    }
+
+    int deleteDept(Integer id){
+        return departmentMapper.deleteDept(id);
     }
 }

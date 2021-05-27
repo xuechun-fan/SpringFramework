@@ -5,16 +5,12 @@ import com.fxc.dao.EmployeeDao;
 import com.fxc.pojo.Department;
 import com.fxc.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -26,17 +22,31 @@ public class EmployeeController {
     @Autowired
     DepartmentDao departmentDao;
 
+    @RequestMapping("/index")
+    public String index(){
+        return "/index";
+    }
+
     @RequestMapping("/emps")
     public String list(Model model){
-        Collection<Employee> employees = employeeDao.getAll();
+        //  查询所有员工信息
+        Collection<Employee> employees = employeeDao.queryEmpList();
         model.addAttribute("emps", employees);
+        //  部门位置通过id对应，找出相应的文字显示
+        Collection<Department> departments = departmentDao.queryDeptList();
+        Map<Integer, String> depts = new HashMap<>();
+        for (Department department:
+             departments) {
+            depts.put(department.getId(), department.getDeptName());
+        }
+        model.addAttribute("depts", depts);
         return "emp/list";
     }
 
     @GetMapping("/toAddPage")
     public String toAddPage(Model model){
         //  查询所有部门信息，并添加到 model 中
-        Collection<Department> departments = departmentDao.getDepartments();
+        Collection<Department> departments = departmentDao.queryDeptList();
         model.addAttribute("departments", departments);
         return "emp/addPage";
     }
@@ -44,7 +54,7 @@ public class EmployeeController {
     @PostMapping("/addEmp")
     public String addEmp(Employee employee){
         //  添加员工业务。
-        employeeDao.save(employee); //  调用底层业务方法，保存员工信息
+        employeeDao.addEmp(employee); //  调用底层业务方法，保存员工信息
         System.out.println("[debug] save ===> " + employee);
         return "redirect:/emps";
     }
@@ -53,10 +63,10 @@ public class EmployeeController {
     @GetMapping("/toUpdatePage/{id}")
     public String toUpdatePage(@PathVariable("id") Integer id, Model model){
         //  查询所有部门信息，并添加到 model 中
-        Collection<Department> departments = departmentDao.getDepartments();
+        Collection<Department> departments = departmentDao.queryDeptList();
         model.addAttribute("departments", departments);
         //  传递员工id参数
-        Employee employee = employeeDao.getEmployeeById(id);
+        Employee employee = employeeDao.queryEmpById(id);
         model.addAttribute("emp", employee);
 //        System.out.println("[debug] updateEmp ==>  id : " + id);
         return "emp/updatePage";
@@ -64,7 +74,7 @@ public class EmployeeController {
     @PostMapping("/updateEmp")
     public String updateEmp(Employee employee){
         //  更新员工信息业务
-        employeeDao.save(employee);
+        employeeDao.updateEmp(employee);
         return "redirect:/emps";
     }
 
@@ -73,7 +83,7 @@ public class EmployeeController {
     @GetMapping("/deleteEmp/{id}")
     public String deleteEmp(@PathVariable("id")Integer id){
         //  删除员工信息业务
-        employeeDao.deleteById(id);
+        employeeDao.deleteEmpById(id);
         return "redirect:/emps";
     }
 

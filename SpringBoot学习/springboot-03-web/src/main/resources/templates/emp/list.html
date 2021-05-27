@@ -56,21 +56,21 @@
 							<thead>
 								<tr>
 									<th>id</th>
-									<th>lastName</th>
-									<th>email</th>
-									<th>gender</th>
-									<th>department</th>
-									<th>birth</th>
+									<th>姓名</th>
+									<th>邮箱</th>
+									<th>性别</th>
+									<th>部门</th>
+									<th>生日</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="emp:${emps}">
 									<td th:text="${emp.getId()}"></td>
-									<td th:text="${emp.getLastName()}"></td>
+									<td th:text="${emp.getName()}"></td>
 									<td>[[${emp.getEmail()}]]</td>
 									<td>[[${emp.getGender()==0?'女':'男'}]]</td>
-									<td>[[${emp.getDepartment().getDepartmentName()}]]</td>
+									<td>[[${depts.get(emp.getDepartment())}]]</td>
 									<td>[[${#dates.format(emp.getBirth(), 'yyyy-MM-dd')}]]</td>
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/toUpdatePage/}+${emp.getId()}">编辑</a>
@@ -83,6 +83,7 @@
 				</main>
 			</div>
 		</div>
+
 
 		<!-- Bootstrap core JavaScript
     ================================================== -->

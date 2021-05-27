@@ -10,28 +10,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//  员工表
 public class Employee {
     private Integer id;
-    private String lastName;
+    private String name;
     private String email;
     private Integer gender;     // 0:女  1：男
-    private Department department;
-    private Date birth;
-
-    public Employee(Integer id, String lastName, String email, Integer gender, Department department) {
-        this.id = id;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.department = department;
-        this.birth = new Date();
-    }
-
-    public Employee(String lastName, String email, Integer gender, Department department) {
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.department = department;
-        this.birth = new Date();
-    }
+    private Integer department;
+    private String birth;
 }

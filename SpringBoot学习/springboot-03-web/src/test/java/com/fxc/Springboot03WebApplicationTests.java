@@ -11,8 +11,6 @@ class Springboot03WebApplicationTests {
 
     @Test
     void contextLoads() {
-        DepartmentDao departmentDao = new DepartmentDao();
-        System.out.println(departmentDao.getDepartmentById(105));
 
     }
 
