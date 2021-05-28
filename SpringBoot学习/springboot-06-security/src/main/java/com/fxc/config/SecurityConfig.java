@@ -19,8 +19,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/level1/**").hasRole("vip1")
                 .antMatchers("/level2/**").hasRole("vip2")
                 .antMatchers("/level3/**").hasRole("vip3");
+
         //  没有权限，默认跳转登陆页面
-        http.formLogin();
+        http.formLogin().loginPage("/toLogin")
+                .usernameParameter("user")
+                .passwordParameter("pwd")
+                .successForwardUrl("/index")
+                .failureForwardUrl("/toLogin");
+
+
+        //  关闭csrf功能    防止跨站攻击工具： get post
+        http.csrf().disable();
+
+        //  注销
+        http.logout().deleteCookies().logoutSuccessUrl("/index");
+
+        //  开启记住我功能，默认保存两周
+        http.rememberMe().rememberMeParameter("remember");
     }
 
     //  认证，   springboot 2.1.X  可以直接使用
