@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    username: root
+    password: 333
+    # 假如时区报错了，增加一个时区的配置：serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #    initialSize: 5
+    # Spring Boot 默认是不注入这些属性的，需要自己绑定
+    # Druid 数据源专有配置
+    initialSize: 5
+    minSdle:
+    maxActive: 20
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+    # 配置监控统计拦截的 filters   stat:监控统计  log4j：日志记录  wall：防御sql注入
+    # 如果允许时报错，java.lang.ClassNotFoundException:org.apache.log4j.Priority
+    # 则导入 log4j 依赖即可
+    filters: stat, wall, log4j
+
+    druid:
+      max-pool-prepared-statement-per-connection-size: 20
+      use-global-data-source-stat: true
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
