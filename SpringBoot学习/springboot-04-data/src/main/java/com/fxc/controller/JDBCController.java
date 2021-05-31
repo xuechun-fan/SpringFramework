@@ -22,21 +22,21 @@ public class JDBCController {
     //  没有实体类，数据库中的东西，怎么获取？ Map
     @ResponseBody
     @GetMapping("/userList")
-    public List<Map<String, Object>> userList(){
+    public List<Map<String, Object>> userList() {
         String sql = "select * from mydb.t_emp";
         List<Map<String, Object>> list_maps = jdbcTemplate.queryForList(sql);
         return list_maps;
     }
 
     @GetMapping("/addUser")
-    public String addUser(){
+    public String addUser() {
         String sql = "insert into mydb.t_emp values (11, '周杰伦', 40, 3, 100021)";
         jdbcTemplate.update(sql);
         return "redirect:/userList";
     }
 
     @GetMapping("/updateUser/{id}")
-    public String updateUser(@PathVariable("id") Integer id){
+    public String updateUser(@PathVariable("id") Integer id) {
         String sql = "update mydb.t_emp set name=? where id=" + id;
         //  封装
         Object object = "小明";
@@ -46,8 +46,8 @@ public class JDBCController {
 
 
     @GetMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id")Integer id){
-        String sql = "delete from mydb.t_emp where id="+id;
+    public String deleteUser(@PathVariable("id") Integer id) {
+        String sql = "delete from mydb.t_emp where id=" + id;
         jdbcTemplate.execute(sql);
         return "redirect:/userList";
     }

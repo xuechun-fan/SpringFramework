@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9604532e-dbd4-4535-b6b9-a3ade0c5c6aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/config/ShiroConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/config/UserRealm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/pojo/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/templates/user/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/templates/user/update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/controller/MyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/java/com/fxc/controller/MyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/test/java/com/fxc/ShiroSpringbootApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/src/test/java/com/fxc/ShiroSpringbootApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/classes/com/fxc/controller/MyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/classes/com/fxc/controller/MyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/test-classes/com/fxc/ShiroSpringbootApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-08-shiro/shiro-springboot/target/test-classes/com/fxc/ShiroSpringbootApplicationTests.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="H:\Java_Environment\apache-maven-3.6.3\maven-repo" />
+        <option name="mavenHome" value="C:\Users\FXC\.m2\wrapper\dists\apache-maven-3.8.1-bin\2l5mhf2pq2clrde7f7qp1rdt5m\apache-maven-3.8.1" />
+        <option name="userSettingsFile" value="H:\Java_Environment\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1t7ad2YaQm6ZRDuhp9bFOtFxFBW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="H:/Java_Environment/apache-maven-3.6.3/maven-repo/org/springframework/security/spring-security-config/5.5.0/spring-security-config-5.5.0.jar" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Springboot06SecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="springboot-06-security" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.fxc.Springboot06SecurityApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.106" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=utf-8" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_Default_(Template)_Project" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="9249" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9604532e-dbd4-4535-b6b9-a3ade0c5c6aa" name="Default Changelist" comment="" />
+      <created>1622122664583</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622122664583</updated>
+      <workItem from="1622122668010" duration="2774000" />
+      <workItem from="1622188727885" duration="4391000" />
+      <workItem from="1622269509249" duration="45000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="605" y="320" key="#com.intellij.ide.util.MemberChooser" timestamp="1622124781060">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="605" y="320" key="#com.intellij.ide.util.MemberChooser/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622124781060" />
+    <state x="574" y="360" key="FileChooserDialogImpl" timestamp="1622124574115">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="574" y="360" key="FileChooserDialogImpl/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622124574115" />
+    <state width="1581" height="323" key="GridCell.Tab.0.bottom" timestamp="1622193123297">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.0.bottom/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123297" />
+    <state width="1581" height="323" key="GridCell.Tab.0.center" timestamp="1622193123297">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.0.center/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123297" />
+    <state width="1581" height="323" key="GridCell.Tab.0.left" timestamp="1622193123297">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.0.left/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123297" />
+    <state width="1581" height="323" key="GridCell.Tab.0.right" timestamp="1622193123297">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.0.right/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123297" />
+    <state width="1581" height="323" key="GridCell.Tab.1.bottom" timestamp="1622193123298">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.1.bottom/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123298" />
+    <state width="1581" height="323" key="GridCell.Tab.1.center" timestamp="1622193123297">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.1.center/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123297" />
+    <state width="1581" height="323" key="GridCell.Tab.1.left" timestamp="1622193123297">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.1.left/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123297" />
+    <state width="1581" height="323" key="GridCell.Tab.1.right" timestamp="1622193123297">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1581" height="323" key="GridCell.Tab.1.right/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193123297" />
+    <state x="239" y="237" key="SettingsEditor" timestamp="1622124625748">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="239" y="237" key="SettingsEditor/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622124625748" />
+    <state x="84" y="284" key="new project wizard" timestamp="1622193121664">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="84" y="284" key="new project wizard/2560.-104.1680.1010/0.0.2560.1400@0.0.2560.1400" timestamp="1622193121664" />
+  </component>
+</project>

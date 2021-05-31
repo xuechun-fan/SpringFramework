@@ -12,9 +12,9 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         //  登陆成功后，应该有用户的session
         System.out.println("执行了Handler。。。。");
         String requestURL = request.getRequestURI();
-        System.out.println("请求URL-----》》》》"+requestURL);
+        System.out.println("请求URL-----》》》》" + requestURL);
         Object loginUser = request.getSession().getAttribute("loginUser");
-        if(loginUser==null){
+        if (loginUser == null) {
             request.setAttribute("msg", "没有权限，请先登录");
             request.getRequestDispatcher("/index.html").forward(request, response);
             return false;
