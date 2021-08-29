@@ -33,8 +33,8 @@ public class ShiroConfig {
         filterMap.put("/user/add", "authc");
         filterMap.put("/user/update", "authc");
         //  授权
-        filterMap.put("/user/add", "perms[user:add]");
-        filterMap.put("/user/update", "perms[user:update]");
+        filterMap.put("/user/add", "perms[admin]");
+        filterMap.put("/user/update", "perms[customer]");
 
         bean.setFilterChainDefinitionMap(filterMap);
 

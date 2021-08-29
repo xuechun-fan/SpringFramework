@@ -7,24 +7,24 @@
 </head>
 <body>
 
-<h1>首页</h1>
-<p th:text="${msg}"></p>
+    <h1>首页</h1>
+    <p th:text="${msg}"></p>
 
-<div shiro:hasPermission="user:add">
-    <a th:href="@{/user/add}">添加</a>
-</div>
+    <div shiro:hasPermission="admin">
+        <a th:href="@{/user/add}">添加</a>
+    </div>
 
-<div shiro:hasPermission="user:update">
-    <a th:href="@{/user/update}">更新</a>
-</div>
+    <div shiro:hasPermission="customer">
+        <a th:href="@{/user/update}">更新</a>
+    </div>
 
-<div shiro:notAuthenticated="true">
-    <a th:href="@{/toLogin}">login</a>
-</div>
+    <div shiro:notAuthenticated="true">
+        <a th:href="@{/toLogin}">login</a>
+    </div>
 
-<div shiro:authenticated="true">
-    <a th:href="@{/logout}">logout</a>
-</div>
+    <div shiro:authenticated="true">
+        <a th:href="@{/logout}">logout</a>
+    </div>
 
 
 </body>
