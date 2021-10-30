@@ -25,31 +25,32 @@ import java.util.Arrays;
 @Component
 public class WebLogAspect {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
+    ThreadLocal<Long> startTime = new ThreadLocal<>();
     @Autowired
     private LogService logService;
 
-    private static Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
-
-    ThreadLocal<Long> startTime = new ThreadLocal<>();
-
     @Pointcut("execution(public * cn.luischen.controller..*.*(..))")
-    public void webLog(){}
+    public void webLog() {
+    }
 
 
     @Before("webLog()")
-    public void doBefore(JoinPoint joinPoint){
+    public void doBefore(JoinPoint joinPoint) {
 
         startTime.set(System.currentTimeMillis());
 
         //接收到请求，记录请求内容
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes attributes =
+                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         HttpSession session = request.getSession();
         // 记录下请求内容
         LOGGER.info("URL : " + request.getRequestURL().toString());
         LOGGER.info("HTTP_METHOD : " + request.getMethod());
         LOGGER.info("IP : " + request.getRemoteAddr());
-        LOGGER.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        LOGGER.info("CLASS_METHOD : " + joinPoint.getSignature()
+                .getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         LOGGER.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
     }
 

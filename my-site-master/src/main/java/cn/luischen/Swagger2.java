@@ -11,9 +11,13 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Swagger2 配置
- * Created by Donghua.Chen on 2018/4/20.
+ *
+ * @author Donghua.Chen
  */
 @Configuration
 @EnableSwagger2
@@ -25,21 +29,24 @@ public class Swagger2 {
 
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .enable(swaggerShow)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("cn.luischen.controller"))
-                .paths(PathSelectors.any())
-                .build();
+        return new Docket(DocumentationType.SWAGGER_2).enable(swaggerShow).apiInfo(apiInfo())
+                                                      .select().apis(RequestHandlerSelectors
+                        .basePackage("cn.luischen.controller")).paths(PathSelectors.any()).build();
     }
+
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Luis Site Swagger Restful API")
-                .description("更多Spring Boot相关文章请关注：https://luischen.com/")
-                .termsOfServiceUrl("https://luischen.com/")
-                .contact("Luis chen")
-                .version("1.0")
-                .build();
+        return new ApiInfoBuilder().title("Luis Site Swagger Restful API")
+                                   .description("更多Spring Boot相关文章请关注：https://luischen.com/")
+                                   .termsOfServiceUrl("https://luischen.com/").contact("Luis chen")
+                                   .version("1.0").build();
+    }
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                .format(new Date(System.currentTimeMillis()));
+        System.out.println(format);
     }
 }

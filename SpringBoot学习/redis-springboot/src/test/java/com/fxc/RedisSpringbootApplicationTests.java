@@ -29,8 +29,8 @@ class RedisSpringbootApplicationTests {
     public void test() throws JsonProcessingException {
         //  真实的开发一般都是用json来传递对象
         User user = new User("范学春", 23);
-//        String jsonUser = new ObjectMapper().writeValueAsString(user);
-//        template.opsForValue().set("user", jsonUser);
+        //        String jsonUser = new ObjectMapper().writeValueAsString(user);
+        //        template.opsForValue().set("user", jsonUser);
         template.opsForValue().set("user", user);
         System.out.println(template.opsForValue().get("user"));
     }

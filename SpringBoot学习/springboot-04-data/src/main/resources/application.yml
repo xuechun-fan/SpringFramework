@@ -10,7 +10,7 @@ spring:
     # Spring Boot 默认是不注入这些属性的，需要自己绑定
     # Druid 数据源专有配置
     initialSize: 5
-    minSdle:
+    minIdle:
     maxActive: 20
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000

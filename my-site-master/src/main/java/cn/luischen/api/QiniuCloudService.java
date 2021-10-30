@@ -1,6 +1,5 @@
 package cn.luischen.api;
 
-import cn.luischen.utils.TaleUtils;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
@@ -9,9 +8,7 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,14 +24,10 @@ public class QiniuCloudService {
     private String ACCESS_KEY;
     @Value("${qiniu.serectkey}")
     private String SECRET_KEY;
-    /**
-     * 仓库
-     */
+    /** 仓库 */
     @Value("${qiniu.bucket}")
     private String BUCKET;
-    /**
-     * 七牛云外网访问地址
-     */
+    /** 七牛云外网访问地址 */
     @Value("${qiniu.cdn.url}")
     public String QINIU_UPLOAD_SITE;
 
