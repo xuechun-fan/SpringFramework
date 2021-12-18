@@ -17,6 +17,11 @@
     </bean>
     <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
         <property name="authenticationStrategy" ref="firstSuccessfulStrategy"/>
+<!--        <property name="realms">-->
+<!--            <list>-->
+<!--                <ref bean="myRealm01"/>-->
+<!--            </list>-->
+<!--        </property>-->
     </bean>
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realms">

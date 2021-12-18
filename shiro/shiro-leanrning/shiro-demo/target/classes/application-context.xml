@@ -12,8 +12,24 @@
 
     <bean id="myRealm01" class="com.fxc.shirodemo.realms.MyRealm01"/>
 
+    <bean id="firstSuccessfulStrategy" class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy">
+        <property name="stopAfterFirstSuccess" value="true"/>
+    </bean>
+    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+        <property name="authenticationStrategy" ref="firstSuccessfulStrategy"/>
+        <property name="realms">
+            <list>
+                <ref bean="myRealm01"/>
+            </list>
+        </property>
+    </bean>
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="myRealm01"/>
+<!--        <property name="realms">-->
+<!--            <list>-->
+<!--                <ref bean="myRealm01"/>-->
+<!--            </list>-->
+<!--        </property>-->
+        <property name="authenticator" ref="authenticator"/>
     </bean>
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
