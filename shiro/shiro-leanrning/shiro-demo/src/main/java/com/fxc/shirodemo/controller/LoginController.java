@@ -3,6 +3,7 @@ package com.fxc.shirodemo.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,8 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         try {
             // 执行登录操作
-            SecurityUtils.getSubject().login(token);
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
         } catch (AuthenticationException e) {
             return "登陆失败： " + e.getMessage();
         }
