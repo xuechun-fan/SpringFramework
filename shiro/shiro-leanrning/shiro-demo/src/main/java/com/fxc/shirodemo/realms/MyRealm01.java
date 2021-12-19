@@ -1,27 +1,26 @@
 package com.fxc.shirodemo.realms;
 
 import com.fxc.shirodemo.domain.UserDO;
+import com.fxc.shirodemo.service.UserService;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.realm.AuthenticatingRealm;
-import org.springframework.util.StringUtils;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 自定义Realm继承自AuthenticatingRealm，实现认证功能
  *
  * @author FXC
  */
+@Component
 public class MyRealm01 extends AuthenticatingRealm {
 
-    /** 模拟DB存储用户数据 */
-    private final Map<String, UserDO> cache = new HashMap<String, UserDO>(8);
-
-    public MyRealm01() {
-        cache.put("zhangsan", new UserDO(1, "zhangsan", "123"));
-        cache.put("lisi", new UserDO(1, "lisi", "123"));
-    }
+    /** 注入用户服务 */
+    @Autowired
+    private UserService userService;
 
     /**
      * 核心方法
@@ -37,26 +36,21 @@ public class MyRealm01 extends AuthenticatingRealm {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         // 获取用户登录时的用户名
         String username = usernamePasswordToken.getUsername();
-        UserDO userFromDb = getUserFromDb(username);
+        UserDO userFromDb = userService.selectUserByName(username);
         if (userFromDb == null) {
             // 说明用户登录时用户名不存在
             throw new UnknownAccountException("用户名不存在...");
         }
         // 返回从DB中查询到的信息
-        return new SimpleAuthenticationInfo(userFromDb.getUserName(), userFromDb.getPassword(),
-                                            getName());
+        return new SimpleAuthenticationInfo(userFromDb.getUsername(), userFromDb.getPassword(), ByteSource.Util
+                .bytes(userFromDb.getUsername()), getName());
     }
 
-    /**
-     * 模拟从数据库中查询用户信息
-     *
-     * @param userName
-     * @return
-     */
-    private UserDO getUserFromDb(String userName) {
-        if (StringUtils.isEmpty(userName)) {
-            return null;
-        }
-        return cache.get(userName);
+    @Override
+    public CredentialsMatcher getCredentialsMatcher() {
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher("md5");
+        matcher.setHashIterations(1024);
+        return matcher;
     }
+
 }

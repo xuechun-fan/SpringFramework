@@ -16,7 +16,7 @@ public class UserDO {
     /** 用户记录ID */
     private Integer id;
     /** 用户名 */
-    private String userName;
+    private String username;
     /** 用户密码 */
     private String password;
 }
