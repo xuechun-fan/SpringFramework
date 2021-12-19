@@ -10,43 +10,37 @@
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-
+    <!-- 整合mybatis 需要配置三个bean, 分别为 DataSource、SqlSessionFactoryBean、MapperScannerConfigurer-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="username" value="root"/>
-        <property name="password" value="333"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/shirodb?characterEncoding=UTF-8"/>
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://47.98.100.6:3306/shirodb?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="971231Fan_"/>
     </bean>
-    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:mybatis.xml"/>
-    </bean>
-
-    <!-- 自定义Realm bean -->
-    <bean id="myRealm01" class="com.fxc.shirodemo.realms.MyRealm01"/>
-    <!-- 多 Realm 认证策略 -->
-    <bean id="firstSuccessfulStrategy" class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy">
-        <property name="stopAfterFirstSuccess" value="true"/>
-    </bean>
-    <!-- 身份验证器 -->
-    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
-        <property name="authenticationStrategy" ref="firstSuccessfulStrategy"/>
-        <!--        <property name="realms">-->
-        <!--            <list>-->
-        <!--                <ref bean="myRealm01"/>-->
-        <!--            </list>-->
-        <!--        </property>-->
-    </bean>
-    <!-- 安全管理器 -->
-    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realms">
+        <property name="typeAliasesPackage" value="com.fxc.shirodemo.domain"/>
+        <!-- 注意注意注意：大坑，这里是指的mapper.xml文件的路径-->
+        <property name="mapperLocations">
             <list>
-                <ref bean="myRealm01"/>
+                <value>classpath:mapper/*.xml</value>
             </list>
         </property>
-        <property name="authenticator" ref="authenticator"/>
+    </bean>
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注意注意注意：大坑，这里是指的mapper.java文件的路径-->
+        <property name="basePackage" value="com.fxc.shirodemo.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
+
+    <!-- shiro 相关配置-->
+    <!-- 自定义Realm bean -->
+    <!--    <bean id="myRealm01" class="com.fxc.shirodemo.realms.MyRealm01"/>-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm01"/>
+    </bean>
+    <!-- shiro 过滤器-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="filterChainDefinitions">
