@@ -1,13 +1,13 @@
-package com.fxc.shirodemo.dao;
+package com.fxc.shirodemo.service;
 
 import com.fxc.shirodemo.domain.UserDO;
-import org.springframework.stereotype.Repository;
 
 /**
- * @author FXC
+ * 用户服务接口
+ *
+ * @author FXC  2021年12月19日 2:49
  */
-@Repository
-public interface UserDao {
+public interface UserService {
 
     /**
      * 根据ID查询用户数据

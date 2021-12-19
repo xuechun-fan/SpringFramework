@@ -10,19 +10,34 @@
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <bean id="myRealm01" class="com.fxc.shirodemo.realms.MyRealm01"/>
 
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="root"/>
+        <property name="password" value="333"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/shirodb?characterEncoding=UTF-8"/>
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    </bean>
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+    </bean>
+
+    <!-- 自定义Realm bean -->
+    <bean id="myRealm01" class="com.fxc.shirodemo.realms.MyRealm01"/>
+    <!-- 多 Realm 认证策略 -->
     <bean id="firstSuccessfulStrategy" class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy">
         <property name="stopAfterFirstSuccess" value="true"/>
     </bean>
+    <!-- 身份验证器 -->
     <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
         <property name="authenticationStrategy" ref="firstSuccessfulStrategy"/>
-<!--        <property name="realms">-->
-<!--            <list>-->
-<!--                <ref bean="myRealm01"/>-->
-<!--            </list>-->
-<!--        </property>-->
+        <!--        <property name="realms">-->
+        <!--            <list>-->
+        <!--                <ref bean="myRealm01"/>-->
+        <!--            </list>-->
+        <!--        </property>-->
     </bean>
+    <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realms">
             <list>
