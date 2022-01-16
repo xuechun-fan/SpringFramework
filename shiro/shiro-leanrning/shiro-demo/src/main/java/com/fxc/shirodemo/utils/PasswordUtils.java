@@ -9,7 +9,7 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 public class PasswordUtils {
 
     public static void main(String[] args) {
-        Md5Hash md5Hash = new Md5Hash("123", "zhangsan", 1024);
+        Md5Hash md5Hash = new Md5Hash("123456", "1a2b3c4d", 1024);
         System.out.println("zhangsan md5Hash = " + md5Hash);
     }
 }
